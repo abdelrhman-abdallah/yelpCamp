@@ -1,22 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Campground Details</title>
-  </head>
-  <body>
-    <h1><%= camp.title %> Details</h1>
-    <ul>
-      <li>Campground Location : <%= camp.location %></li>
-      <li>Campground Price/night: <%= camp.price %></li>
-    </ul>
-    <button>
-      <a href="/campgrounds/<%= camp._id %>/edit">Edit Campground</a>
-    </button>
-    <form action="/campgrounds/<%= camp._id %>?_method=DELETE" method="post">
-      <button>Delete Camp</button>
-    </form>
-    <button><a href="/campgrounds">Back to List</a></button>
-  </body>
-</html>
+<% layout("layouts/boilerplate") %>
+
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card mb-3">
+      <img
+        src="<%= camp.image %>"
+        alt="campground image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><%= camp.title %> Details</h5>
+        <p class="card-text"><%= camp.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item tex-muted"><%= camp.location %></li>
+        <li class="list-group-item">$ <%= camp.price %>/night</li>
+      </ul>
+      <div class="card-body d-flex m-1 justify-content-between">
+        <a
+          class="card-link btn btn-warning"
+          href="/campgrounds/<%= camp._id %>/edit"
+          >Edit Campground</a
+        >
+        <form
+          class="d-inline"
+          action="/campgrounds/<%= camp._id %>?_method=DELETE"
+          method="post"
+        >
+          <button class="btn btn-danger">Delete Camp</button>
+        </form>
+        <a class="btn btn-primary" href="/campgrounds">Back to List</a>
+      </div>
+      <div class="card-footer text-muted">2 days ago</div>
+    </div>
+  </div>
+</div>
