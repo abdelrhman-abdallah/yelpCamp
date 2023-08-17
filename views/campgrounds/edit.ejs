@@ -3,7 +3,12 @@
 <div class="row">
   <h1 class="text-center">Editting <%= camp.title %> Camp</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="post">
+    <form
+      action="/campgrounds/<%= camp._id %>?_method=PUT"
+      method="post"
+      class="validated-form"
+      novalidate
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Campground Title: </label>
         <input
@@ -12,7 +17,9 @@
           id="title"
           name="campground[title]"
           value="<%= camp.title %>"
+          required
         />
+        <div class="valid-feedback">Title Looks Good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Campground Location: </label>
@@ -22,7 +29,9 @@
           id="location"
           name="campground[location]"
           value="<%= camp.location %>"
+          required
         />
+        <div class="valid-feedback">Location Looks Good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price: </label>
@@ -35,7 +44,9 @@
             placeholder="0.00"
             name="campground[price]"
             value="<%= camp.price %>"
+            required
           />
+          <div class="valid-feedback">Price Looks Good!</div>
         </div>
       </div>
       <div class="mb-3">
@@ -46,7 +57,9 @@
           id="image"
           name="campground[image]"
           value="<%= camp.image %>"
+          required
         />
+        <div class="valid-feedback">Image Looks Good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="description"
@@ -57,9 +70,11 @@
           type="text"
           id="description"
           name="campground[description]"
+          required
         >
 <%= camp.description %></textarea
         >
+        <div class="valid-feedback">Description Looks Good!</div>
       </div>
       <button class="btn btn-success mb-3">Update Campground</button>
     </form>
