@@ -8,7 +8,10 @@
   </head>
   <body class="d-flex flex-column vh-100">
     <%- include("../partials/navbar") %>
-    <main class="container mt-4"><%- body %></main>
+    <main class="container mt-4">
+      <%- include("../partials/successFlash") %> <%-
+      include("../partials/errorFlash") %><%- body %>
+    </main>
     <%- include("../partials/footer") %>
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>

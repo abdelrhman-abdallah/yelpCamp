@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
-const Campground = require("../src/models/campground");
-const cities = require("./cities");
-const { places, descriptors } = require("./seedHelpers");
+const mongoose = require('mongoose');
+const { Campground } = require('../src/models/campground');
+const cities = require('./cities');
+const { places, descriptors } = require('./seedHelpers');
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "Connection error:"));
-db.once("open", () => {
-  console.log("MongoDD Connected");
+db.on('error', console.error.bind(console, 'Connection error:'));
+db.once('open', () => {
+  console.log('MongoDD Connected');
 });
 
 const sample = (arr) => {
@@ -21,11 +21,11 @@ const seedDB = async function () {
     const rand1000 = Math.floor(Math.random() * 1000);
     const camp = new Campground({
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "http://source.unsplash.com/collection/483251",
+      image: 'http://source.unsplash.com/collection/483251',
       location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
       price: Math.floor(Math.random() * 100) + 10,
       description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia sit voluptatem ea eaque sapiente quidem? Consectetur minus cupiditate eligendi! Perspiciatis dolores eaque quisquam dolorum at soluta atque nesciunt eos nam.",
+        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia sit voluptatem ea eaque sapiente quidem? Consectetur minus cupiditate eligendi! Perspiciatis dolores eaque quisquam dolorum at soluta atque nesciunt eos nam.',
     });
     await camp.save();
   }
