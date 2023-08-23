@@ -1,8 +1,7 @@
 const express = require('express');
 const passport = require('passport');
-const ExpressError = require('../utils/ExpressError');
 const AsyncWrapper = require('../utils/AsyncWrapper');
-const User = require('../src/models/user');
+const User = require('../models/user');
 const { storeReturnTo } = require('../middleware');
 
 const router = express.Router();
