@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const ExpressError = require('../utils/ExpressError');
 const AsyncWrapper = require('../utils/AsyncWrapper');
-const { Review } = require('../src/models/review');
-const { Campground } = require('../src/models/campground');
+const { Review } = require('../models/review');
+const { Campground } = require('../models/campground');
 const { reviewSchema } = require('../validationSchemas');
 
 const validateReviewSchema = (req, res, next) => {

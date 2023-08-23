@@ -12,7 +12,7 @@ const methodOverride = require('method-override');
 const reviewRouter = require('./routes/reviewRoutes');
 const campgroundRouter = require('./routes/campgroundRoutes');
 const userRouter = require('./routes/userRoutes');
-const User = require('./src/models/user');
+const User = require('./models/user');
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/yelp-camp')

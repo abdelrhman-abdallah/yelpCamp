@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const ExpressError = require('../utils/ExpressError');
 const AsyncWrapper = require('../utils/AsyncWrapper');
-const { Campground } = require('../src/models/campground');
+const { Campground } = require('../models/campground');
 const { campgroundSchema } = require('../validationSchemas');
 const isLoggedIn = require('../middleware');
 
@@ -35,6 +35,7 @@ router.post(
   AsyncWrapper(async (req, res, next) => {
     const { campground } = req.body;
     const camp = new Campground(campground);
+    camp.author = req.user._id;
     const newCampground = await camp.save();
     req.flash('success', 'Success! Successfully Added a New Campground');
     res.redirect(`/campgrounds/${newCampground._id}`);
@@ -46,7 +47,9 @@ router.get(
   AsyncWrapper(async (req, res) => {
     const campground = await Campground.findById({
       _id: req.params.id,
-    }).populate('reviews');
+    })
+      .populate('reviews')
+      .populate('author');
     if (!campground) {
       req.flash('error', 'Error!!! Cannot Find This Campground');
       res.redirect('/campgrounds');
@@ -92,7 +95,7 @@ router.delete(
     await Campground.findByIdAndDelete(req.params.id);
     req.flash(
       'success',
-      'Success! Successfully Deleted a Campground and All Relevant Data'
+      'Successfully Deleted a Campground and All Relevant Data'
     );
     res.redirect('/campgrounds');
   })
