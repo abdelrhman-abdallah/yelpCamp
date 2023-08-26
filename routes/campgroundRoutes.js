@@ -1,5 +1,9 @@
 const express = require('express');
 
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
+
 const AsyncWrapper = require('../utils/AsyncWrapper');
 const campgroundController = require('../controllers/campgroundController');
 const {
@@ -15,6 +19,7 @@ router
   .get(AsyncWrapper(campgroundController.index))
   .post(
     isLoggedIn,
+    upload.array('campground[images]'),
     validateCampgroundSchema,
     AsyncWrapper(campgroundController.createCampground)
   );
@@ -27,6 +32,7 @@ router
   .put(
     isLoggedIn,
     isAuthor,
+    upload.array('campground[images]'),
     validateCampgroundSchema,
     AsyncWrapper(campgroundController.editCampground)
   )
