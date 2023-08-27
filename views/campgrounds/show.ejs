@@ -3,13 +3,20 @@
 
 <div class="row">
   <div class="col-7">
+    <div id="map" style="width: 400px; height: 300px"></div>
     <div id="campgroundCarasoul" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% camp.images.forEach((image,i)=>{ %>
+        <% if (camp.images.length) { %> <% camp.images.forEach((image,i)=>{ %>
         <div class="carousel-item <%= i===0? 'active':'' %>">
           <img src="<%= image.url %>" alt="" class="d-block w-100" />
         </div>
-        <% }) %> <% if (camp.images.length >1) { %>
+        <% }) %> <% }else{ %>
+        <img
+          src="https://res.cloudinary.com/dav7stmnh/image/upload/v1693048882/YelpCamp/tmim1nnzcklqo2vpzoyc.jpg"
+          alt=""
+          class="img-fluid"
+        />
+        <%}%> <% if (camp.images.length >1) { %>
         <button
           class="carousel-control-prev"
           type="button"
@@ -156,3 +163,9 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const showedCamp = <%- JSON.stringify(camp) %>;
+</script>
+<script src="/bootstrap-5.0.2-dist/js/showMapPage.js"></script>

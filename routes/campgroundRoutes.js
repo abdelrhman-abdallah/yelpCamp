@@ -19,7 +19,7 @@ router
   .get(AsyncWrapper(campgroundController.index))
   .post(
     isLoggedIn,
-    upload.array('campground[images]'),
+    upload.array('campground[images]', 10),
     validateCampgroundSchema,
     AsyncWrapper(campgroundController.createCampground)
   );
@@ -32,7 +32,7 @@ router
   .put(
     isLoggedIn,
     isAuthor,
-    upload.array('campground[images]'),
+    upload.array('campground[images]', 10),
     validateCampgroundSchema,
     AsyncWrapper(campgroundController.editCampground)
   )
