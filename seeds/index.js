@@ -24,31 +24,16 @@ const sample = (arr) => {
 
 const seedDB = async function () {
   await Campground.deleteMany({});
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 500; i++) {
     const rand1000 = Math.floor(Math.random() * 1000);
-    let geom;
-    const geoData = await geoCoder
-      .forwardGeocode({
-        query: `${cities[rand1000].city}, ${cities[rand1000].state}`,
-        limit: 1,
-      })
-      .send();
-    if (geoData) {
-      geom = {
-        type: 'Point',
-        coordinates: geoData.body.features[0].geometry.coordinates,
-      };
-    } else {
-      geom = {
-        type: 'Point',
-        coordinates: [31.235726, 30.044388],
-      };
-    }
     const camp = new Campground({
       author: '64e5057c5c0eaf37dc1690f2',
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
-      geometry: geom,
+      geometry: {
+        type: 'Point',
+        coordinates: [cities[rand1000].longitude, cities[rand1000].latitude],
+      },
       price: Math.floor(Math.random() * 100) + 10,
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia sit voluptatem ea eaque sapiente quidem? Consectetur minus cupiditate eligendi! Perspiciatis dolores eaque quisquam dolorum at soluta atque nesciunt eos nam.',
