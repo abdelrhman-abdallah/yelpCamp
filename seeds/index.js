@@ -39,24 +39,24 @@ const seedDB = async function () {
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia sit voluptatem ea eaque sapiente quidem? Consectetur minus cupiditate eligendi! Perspiciatis dolores eaque quisquam dolorum at soluta atque nesciunt eos nam.',
       images: [
         {
-          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693048849/YelpCamp/s5zr9n4f6cjuyfcuga2w.jpg',
-          filename: 'YelpCamp/s5zr9n4f6cjuyfcuga2w',
+          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693250819/YelpCamp/lsoujvor6cx7pwjzwvpx.jpg',
+          filename: 'YelpCamp/lsoujvor6cx7pwjzwvpx',
         },
         {
-          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693048856/YelpCamp/utjgbpyzznab6gna9cda.jpg',
-          filename: 'YelpCamp/utjgbpyzznab6gna9cda',
+          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693250833/YelpCamp/rq1oucdjd2xd26stl9lp.jpg',
+          filename: 'YelpCamp/rq1oucdjd2xd26stl9lp',
         },
         {
-          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693048870/YelpCamp/m3w2ctsgqk1jp3n1piie.jpg',
-          filename: 'YelpCamp/m3w2ctsgqk1jp3n1piie',
+          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693250852/YelpCamp/odqdbtxlb7milfzstgg6.jpg',
+          filename: 'YelpCamp/odqdbtxlb7milfzstgg6',
         },
         {
-          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693048882/YelpCamp/tmim1nnzcklqo2vpzoyc.jpg',
-          filename: 'YelpCamp/tmim1nnzcklqo2vpzoyc',
+          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693250862/YelpCamp/vupsrnteqribh9gogwdz.jpg',
+          filename: 'YelpCamp/vupsrnteqribh9gogwdz',
         },
         {
-          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693048892/YelpCamp/uxbns1hh6ywqfzsdmqry.jpg',
-          filename: 'YelpCamp/uxbns1hh6ywqfzsdmqry',
+          url: 'https://res.cloudinary.com/dav7stmnh/image/upload/v1693250878/YelpCamp/bt2tneonh5ooika4yru5.jpg',
+          filename: 'YelpCamp/bt2tneonh5ooika4yru5',
         },
       ],
     });
