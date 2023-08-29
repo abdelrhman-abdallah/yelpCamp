@@ -6,7 +6,6 @@ const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
   const campgrounds = await Campground.find({});
-  console.log(campgrounds[0].images);
   res.render('campgrounds/index', { campgrounds });
 };
 
