@@ -7,6 +7,8 @@ const map = new mapboxgl.Map({
   zoom: 9,
 });
 
+map.addControl(new mapboxgl.NavigationControl());
+
 const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
   `<h3>${showedCamp.title}</h3>
   <p>${showedCamp.location}</p>`
