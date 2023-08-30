@@ -10,6 +10,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const contentPolicy = require('./content-policy');
 
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
@@ -36,13 +39,36 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...contentPolicy.connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...contentPolicy.scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...contentPolicy.styleSrcUrls],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        'blob:',
+        'data:',
+        'https://res.cloudinary.com/dav7stmnh/', //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        'https://images.unsplash.com/',
+      ],
+      fontSrc: ["'self'", ...contentPolicy.fontSrcUrls],
+    },
+  })
+);
 
 const sessionConfig = {
+  name: 'userAccess',
   secret: 'thisshouldbeabettersecret!',
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    // secure:true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
@@ -78,7 +104,7 @@ app.all('*', (req, res, next) => {
 app.use((error, req, res, next) => {
   const { statusCode = 500, message = 'Something Went Wrong' } = error;
   res.status(statusCode);
-  res.render('error', { status: statusCode, msg: message });
+  res.render('error', { stack: error.stack, status: statusCode, msg: message });
 });
 
 app.listen(3001, () => {
