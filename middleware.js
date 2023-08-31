@@ -7,7 +7,6 @@ module.exports.validateReviewSchema = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((err) => err.message).join(',');
-    console.log({ msg: 'review' });
     throw new ExpressError(400, msg);
   } else {
     next();

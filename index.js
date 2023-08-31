@@ -2,11 +2,14 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+const dbUrl =
+  process.env.MongoDB_Production_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMateEngine = require('ejs-mate');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const localStrategy = require('passport-local');
@@ -22,7 +25,7 @@ const userRouter = require('./routes/userRoutes');
 const User = require('./models/user');
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/yelp-camp')
+  .connect(dbUrl)
   .then(() => {
     console.log('MongoDB Connected');
   })
@@ -61,14 +64,25 @@ app.use(
   })
 );
 
+const secret = process.env.Secret || 'thisshouldbeasecret';
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 3600,
+  crypto: {
+    secret,
+  },
+});
+
 const sessionConfig = {
+  store,
   name: 'userAccess',
-  secret: 'thisshouldbeabettersecret!',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    // secure:true,
+    secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
@@ -107,6 +121,8 @@ app.use((error, req, res, next) => {
   res.render('error', { stack: error.stack, status: statusCode, msg: message });
 });
 
-app.listen(3001, () => {
-  console.log('Serving on Port 3001');
+const port = process.env.PORT || 3001;
+
+app.listen(port, () => {
+  console.log(`Serving on Port ${port}`);
 });
