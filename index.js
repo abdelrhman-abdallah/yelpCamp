@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+// if (process.env.NODE_ENV !== 'production') {
+require('dotenv').config();
+// }
 
 const dbUrl =
   process.env.MongoDB_Production_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
@@ -99,6 +99,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  console.log(res.locals.success, res.locals.currentUser, res.locals.error);
   next();
 });
 
